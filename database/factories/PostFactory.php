@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
 class PostFactory extends Factory
 {
@@ -23,9 +22,12 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        // Fakerのインスタンスに日本語のロケールを設定
+        $faker = \Faker\Factory::create('ja_JP');
+
         return [
-            'title' => $this->faker->sentence, // タイトルのランダムな文を生成
-            'content' => $this->faker->paragraph, // コンテンツのランダムな段落を生成
+            'title' => $faker->sentence, // タイトルのランダムな文を生成
+            'content' => $faker->paragraph, // コンテンツのランダムな段落を生成
             'user_id' => User::inRandomOrder()->first()->id, // ランダムなユーザーのIDを取得
         ];
     }
