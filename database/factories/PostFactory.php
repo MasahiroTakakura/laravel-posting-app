@@ -2,33 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\Post;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ */
 class PostFactory extends Factory
 {
     /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Post::class;
-
-    /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
-        // Fakerのインスタンスに日本語のロケールを設定
-        $faker = \Faker\Factory::create('ja_JP');
-
         return [
-            'title' => $faker->sentence, // タイトルのランダムな文を生成
-            'content' => $faker->paragraph, // コンテンツのランダムな段落を生成
-            'user_id' => User::inRandomOrder()->first()->id, // ランダムなユーザーのIDを取得
+             'user_id' => 1, // usersテーブルにidカラムの値が1のユーザーが存在することが前提
+             'title' => fake()->realText(20, 5),
+             'content' => fake()->realText(200, 5)
         ];
     }
 }
